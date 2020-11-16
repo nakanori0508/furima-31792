@@ -2,38 +2,37 @@
 
 ## users テーブル
 
-| Column        | Type       | Options     |
-| ------------- | ---------- | ----------- |
-| nickname      | string     | NOT NULL    |
-| email         | string     | NOT NULL    |
-| password      | string     | NOT NULL    |
-| name          | string     | NOT NULL    |
-| name_kana     | string     | NOT NULL    |
-| birthday      | string     | NOT NULL    |
+| Column             | Type       | Options     |
+| ------------------ | ---------- | ----------- |
+| nickname           | string     | NOT NULL    |
+| email              | string     | NOT NULL    |
+| encrypted_password | string     | NOT NULL    |
+| lastname           | string     | NOT NULL    |
+| firstname          | string     | NOT NULL    |
+| lastname_kana      | string     | NOT NULL    |
+| firstname_kana     | string     | NOT NULL    |
+| birthday           | date       | NOT NULL    |
 
 ## items テーブル
 
-| Column        | Type       | Options     |
-| ------------- | ---------- | ----------- |
-| itemName      | string     | NOT NULL    |
-| itemExplan    | text       | NOT NULL    |
-| itemCategory  | string     | NOT NULL    |
-| itemStatus    | string     | NOT NULL    |
-| itemShipFee   | string     | NOT NULL    |
-| prefecture    | string     | NOT NULL    |
-| itemDayShip   | string     | NOT NULL    |
-| itemPrice     | integer    | NOT NULL    |
+| Column             | Type       | Options     |
+| ------------------ | ---------- | ----------- |
+| name               | string     | NOT NULL    |
+| explan             | text       | NOT NULL    |
+| category_id        | integer    | NOT NULL    |
+| status_id          | integer    | NOT NULL    |
+| shipFee_id         | integer    | NOT NULL    |
+| prefecture_id      | integer    | NOT NULL    |
+| dayship_id         | integer    | NOT NULL    |
+| price              | integer    | NOT NULL    |
 
 ## purchases テーブル
 
-| Column        | Type       | Options     |
-| ------------- | ---------- | ----------- |
-| cardInfo      | text       | NOT NULL    |
-| expDate       | integer    | NOT NULL    |
-| securityCode  | integer    | NOT NULL    |
-| postCode      | string     | NOT NULL    |
-| prefecture    | string     | NOT NULL    |
-| municipality  | text       | NOT NULL    |
-| address       | text       | NOT NULL    |
-| buildingName  | text       | NOT NULL    |
-| phoneNumber   | integer    | NOT NULL    |
+| Column             | Type       | Options     |
+| ------------------ | ---------- | ----------- |
+| postCode           | string     | NOT NULL    |
+| prefecture_id      | string     | NOT NULL    |
+| municipality       | string       | NOT NULL    |
+| address            | string       | NOT NULL    |
+| buildingname       | string       | NOT NULL    |
+| phonenumber        | string    | NOT NULL    |
