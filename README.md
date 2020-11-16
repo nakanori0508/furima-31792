@@ -1,24 +1,39 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column        | Type       | Options     |
+| ------------- | ---------- | ----------- |
+| nickname      | string     | NOT NULL    |
+| email         | string     | NOT NULL    |
+| password      | string     | NOT NULL    |
+| name          | string     | NOT NULL    |
+| name_kana     | string     | NOT NULL    |
+| birthday      | string     | NOT NULL    |
 
-* Ruby version
+## items テーブル
 
-* System dependencies
+| Column        | Type       | Options     |
+| ------------- | ---------- | ----------- |
+| itemName      | string     | NOT NULL    |
+| itemExplan    | text       | NOT NULL    |
+| itemCategory  | string     | NOT NULL    |
+| itemStatus    | string     | NOT NULL    |
+| itemShipFee   | string     | NOT NULL    |
+| prefecture    | string     | NOT NULL    |
+| itemDayShip   | string     | NOT NULL    |
+| itemPrice     | integer    | NOT NULL    |
 
-* Configuration
+## purchases テーブル
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+| Column        | Type       | Options     |
+| ------------- | ---------- | ----------- |
+| cardInfo      | text       | NOT NULL    |
+| expDate       | integer    | NOT NULL    |
+| securityCode  | integer    | NOT NULL    |
+| postCode      | string     | NOT NULL    |
+| prefecture    | string     | NOT NULL    |
+| municipality  | text       | NOT NULL    |
+| address       | text       | NOT NULL    |
+| buildingName  | text       | NOT NULL    |
+| phoneNumber   | integer    | NOT NULL    |
