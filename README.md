@@ -1,24 +1,66 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type       | Options     |
+| ------------------ | ---------- | ----------- |
+| nickname           | string     | NOT NULL    |
+| email              | string     | NOT NULL    |
+| encrypted_password | string     | NOT NULL    |
+| lastname           | string     | NOT NULL    |
+| firstname          | string     | NOT NULL    |
+| lastname_kana      | string     | NOT NULL    |
+| firstname_kana     | string     | NOT NULL    |
+| birthday           | date       | NOT NULL    |
 
-* Ruby version
+### Association
+- has_many :items
+- has_many :buyers
 
-* System dependencies
+## items テーブル
 
-* Configuration
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| name               | string     | NOT NULL                       |
+| explan             | text       | NOT NULL                       |
+| category_id        | integer    | NOT NULL, foreign_key: true    |
+| status_id          | integer    | NOT NULL, foreign_key: true    |
+| shipfee_id         | integer    | NOT NULL, foreign_key: true    |
+| prefecture_id      | integer    | NOT NULL, foreign_key: true    |
+| dayship_id         | integer    | NOT NULL, foreign_key: true    |
+| price              | integer    | NOT NULL                       |
+| user_id            | integer    | NOT NULL, foreign_key: true    |
 
-* Database creation
+### Association
+- belongs_to :user
+- has_one :buyers
 
-* Database initialization
+## purchases テーブル
+<!-- 配送先住所テーブル -->
 
-* How to run the test suite
+| Column             | Type       | Options                    |
+| ------------------ | ---------- | -------------------------- |
+| postcode           | string     | NOT NULL                   |
+| prefecture_id      | integer    | NOT NULL                   |
+| municipality       | string     | NOT NULL                   |
+| address            | string     | NOT NULL                   |
+| buildingname       | string     |      -                     |
+| phonenumber        | string     | NOT NULL                   |
+| buyer_id       | integer    | NOT NULL, foreign_key: true    |
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+### Association
+- belongs_to :buyers
 
-* ...
+## buyers テーブル
+<!-- 購入管理テーブル -->
+<!-- 購入履歴テーブル -->
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| user_id            | integer    | NOT NULL, foreign_key: true    |
+| item_id            | integer    | NOT NULL, foreign_key: true    |
+
+### Association
+- has_many :users
+- has_many :items
+- has_one :purcheses
