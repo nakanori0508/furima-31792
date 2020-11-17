@@ -15,7 +15,7 @@
 
 ### Association
 - has_many :items
-- has_many :purchases
+- has_many :buyerinfo
 
 ## items テーブル
 
@@ -23,33 +23,42 @@
 | ------------------ | ---------- | ----------- |
 | name               | string     | NOT NULL    |
 | explan             | text       | NOT NULL    |
-| category_id        | integer    | NOT NULL    |
-| status_id          | integer    | NOT NULL    |
-| shipFee_id         | integer    | NOT NULL    |
-| prefecture_id      | integer    | NOT NULL    |
-| dayship_id         | integer    | NOT NULL    |
+| category_id        | integer    | NOT NULL, foreign_key: true    |
+| status_id          | integer    | NOT NULL, foreign_key: true    |
+| shipfee_id         | integer    | NOT NULL, foreign_key: true    |
+| prefecture_id      | integer    | NOT NULL, foreign_key: true    |
+| dayship_id         | integer    | NOT NULL, foreign_key: true    |
 | price              | integer    | NOT NULL    |
 
 ### Association
 - belongs_to :user
+- has_one :buyerinfo
 
 ## purchases テーブル
+<!-- 配送先住所テーブル -->
 
 | Column             | Type       | Options     |
 | ------------------ | ---------- | ----------- |
-| postCode           | string     | NOT NULL    |
-| prefecture_id      | string     | NOT NULL    |
+| postcode           | string     | NOT NULL    |
+| prefecture_id      | integer    | NOT NULL    |
 | municipality       | string     | NOT NULL    |
 | address            | string     | NOT NULL    |
 | buildingname       | string     |      -      |
 | phonenumber        | string     | NOT NULL    |
+| buyerinfo_id       | integer    | NOT NULL, foreign_key: true    |
+
 
 ### Association
-- belongs_to :user
+- belongs_to :buyerinfo
 
 ## buyerinfo テーブル
-
+<!-- 購入管理テーブル -->
+<!-- 購入履歴テーブル -->
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | user_id            | integer    | NOT NULL, foreign_key: true    |
 | item_id            | integer    | NOT NULL, foreign_key: true    |
+
+### Association
+- has_many :users
+- has_many :items
