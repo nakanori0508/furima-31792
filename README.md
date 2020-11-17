@@ -15,43 +15,44 @@
 
 ### Association
 - has_many :items
-- has_many :buyerinfo
+- has_many :buyers
 
 ## items テーブル
 
-| Column             | Type       | Options     |
-| ------------------ | ---------- | ----------- |
-| name               | string     | NOT NULL    |
-| explan             | text       | NOT NULL    |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| name               | string     | NOT NULL                       |
+| explan             | text       | NOT NULL                       |
 | category_id        | integer    | NOT NULL, foreign_key: true    |
 | status_id          | integer    | NOT NULL, foreign_key: true    |
 | shipfee_id         | integer    | NOT NULL, foreign_key: true    |
 | prefecture_id      | integer    | NOT NULL, foreign_key: true    |
 | dayship_id         | integer    | NOT NULL, foreign_key: true    |
-| price              | integer    | NOT NULL    |
+| price              | integer    | NOT NULL                       |
+| user_id            | integer    | NOT NULL, foreign_key: true    |
 
 ### Association
 - belongs_to :user
-- has_one :buyerinfo
+- has_one :buyers
 
 ## purchases テーブル
 <!-- 配送先住所テーブル -->
 
-| Column             | Type       | Options     |
-| ------------------ | ---------- | ----------- |
-| postcode           | string     | NOT NULL    |
-| prefecture_id      | integer    | NOT NULL    |
-| municipality       | string     | NOT NULL    |
-| address            | string     | NOT NULL    |
-| buildingname       | string     |      -      |
-| phonenumber        | string     | NOT NULL    |
-| buyerinfo_id       | integer    | NOT NULL, foreign_key: true    |
+| Column             | Type       | Options                    |
+| ------------------ | ---------- | -------------------------- |
+| postcode           | string     | NOT NULL                   |
+| prefecture_id      | integer    | NOT NULL                   |
+| municipality       | string     | NOT NULL                   |
+| address            | string     | NOT NULL                   |
+| buildingname       | string     |      -                     |
+| phonenumber        | string     | NOT NULL                   |
+| buyer_id       | integer    | NOT NULL, foreign_key: true    |
 
 
 ### Association
-- belongs_to :buyerinfo
+- belongs_to :buyers
 
-## buyerinfo テーブル
+## buyers テーブル
 <!-- 購入管理テーブル -->
 <!-- 購入履歴テーブル -->
 | Column             | Type       | Options                        |
@@ -62,3 +63,4 @@
 ### Association
 - has_many :users
 - has_many :items
+- has_one :purcheses
