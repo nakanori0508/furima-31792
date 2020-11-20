@@ -57,9 +57,20 @@ group :development do
   gem 'rubocop', require: false
 end
 
+# 画像操作用
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 
+# 新規登録・ログイン機能実装用
 gem 'devise'
 
+
 gem 'active_hash'
+
+# テストコード用
+gem 'rspec-rails', '~> 4.0.0'
+gem 'factory_bot_rails'
+gem 'faker'
+
+# binding.pry使用
+gem 'pry-rails'
