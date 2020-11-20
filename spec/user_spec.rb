@@ -10,7 +10,6 @@ RSpec.describe User, type: :model do
       it "新規登録データが正常に入っていること" do
         # be_validは正常系の時しか使わない
         # be_validは正しくデータが保存されているか確認する
-        # valid?はバリデーションが正しくかかっているか確認する
         expect(@user).to be_valid
       end
     end
@@ -18,6 +17,7 @@ RSpec.describe User, type: :model do
     context '新規登録がうまくいかない時（異常系）'do
 
       # -----nicknameの異常系-----
+      # valid?はバリデーションが正しくかかっているか確認する。正常系では使わない。
       it "nicknameが空のため登録できないこと" do
         @user.nickname = ""
         @user.valid?
@@ -25,24 +25,6 @@ RSpec.describe User, type: :model do
         # includeを使うのは、@user.errors.full_messagesの出力結果が配列であり、配列内に指定した値があるか確認するため
         expect(@user.errors.full_messages).to include("Nickname can't be blank")
       end
-      # 多分いらないけど、せっかく書いちゃったので記念に取っておきたい
-      # it "nicknameに英文字が使われているため登録できないこと" do
-      #   @user.nickname = "ラーメンaつけ麺"
-      #   @user.valid?
-      #   binding.pry
-      #   expect(@user.errors.full_messages).to include("Nickname is invalid")
-      # end
-
-      # it "nicknameに数字が使われているため登録できないこと" do
-      #   @user.nickname = "ラーメン111つけ麺"
-      #   @user.valid?
-      #   expect(@user.errors.full_messages).to include("Nickname is invalid")
-      # end
-      # it "nicknameに記号が使われているため登録できないこと" do
-      #   @user.nickname = "ラーメン.?¥つけ麺"
-      #   @user.valid?
-      #   expect(@user.errors.full_messages).to include("Nickname is invalid")
-      # end
 
       # -----emailの異常系-----
       it "emailが空のため登録できないこと" do
@@ -69,6 +51,14 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Email is too short (minimum is 6 characters)")
       end
       
+      it "すでに登録済みのemailで登録しようとしても登録できないこと" do
+        @user.save
+        another_user = FactoryBot.build(:user)
+        another_user.email = @user.email
+        another_user.valid?
+        expect(another_user.errors.full_messages).to include("Email has already been taken")
+      end
+
       # -----passwordの異常系-----
       it "passwordが空のため登録できないこと" do
         @user.password = ""
@@ -162,3 +152,22 @@ end
 
 # ターミナル上でrails cコマンドを実行する。変数A = ""みたいに定義する。変数A.match(正規表現)
 # 例：nickname.match(/\A[ぁ-んァ-ン一-龥])
+
+      # 多分いらないけど、せっかく書いちゃったので記念に取っておきたい
+      # it "nicknameに英文字が使われているため登録できないこと" do
+      #   @user.nickname = "ラーメンaつけ麺"
+      #   @user.valid?
+      #   binding.pry
+      #   expect(@user.errors.full_messages).to include("Nickname is invalid")
+      # end
+
+      # it "nicknameに数字が使われているため登録できないこと" do
+      #   @user.nickname = "ラーメン111つけ麺"
+      #   @user.valid?
+      #   expect(@user.errors.full_messages).to include("Nickname is invalid")
+      # end
+      # it "nicknameに記号が使われているため登録できないこと" do
+      #   @user.nickname = "ラーメン.?¥つけ麺"
+      #   @user.valid?
+      #   expect(@user.errors.full_messages).to include("Nickname is invalid")
+      # end
