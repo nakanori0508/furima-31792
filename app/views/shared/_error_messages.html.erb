@@ -1,0 +1,10 @@
+<% if model.errors.any? %>
+<%# @user等の固定のモデル名に指定しまうと、他の用途の時にも@userしか使えなくなるのでここは「model.errors」でやっていく %>
+<div class="error-alert">
+  <ul>
+    <% model.errors.full_messages.each do |message| %>
+    <li class='error-message'><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
