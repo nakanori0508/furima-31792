@@ -3,6 +3,10 @@ class Item < ApplicationRecord
   belongs_to :user
 
   extend ActiveHash::Associations::ActiveRecordExtensions
+  # A.B.カラム名が成立(アソシエーションを組んでいるから)。このモデルファイルはitemだから。
+  # 複数のitemは1つのユーザーに依存している。だから多対1の関係のアソシエーションを組む場合は単数形の記載になる。
+  # アソシエーションを組んでれば大体できる。ActiveStorageのimageは取得できるが、それ以外のカラムは気にしないこと。
+  # userのモデルファイルにも注意事項を記載している
     belongs_to :prefecture
     belongs_to :category
     belongs_to :status
