@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # 1つのユーザーは複数のitemを持っている。だから1対多の関係のアソシエーションを組む時は複数形になる。
+  # @user = User.find(1)とした時、@userにアソシエーションがかかってるitemを取得したい時は
+  # @user.items[0].explan とすることで表示できる。itemsは複数形（1対多、[]は該当ユーザーのitemが配列で格納されるため）
   has_many :items
 
   with_options presence: true do 

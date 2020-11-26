@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   # newアクションとcreateアクション実行時、未ログインユーザーは弾かれてログイン画面へ遷移する
   before_action :authenticate_user!,only:[:new,:create]
   def index
-    # @items = Item.order("created_at DESC")
+    @items = Item.includes(:user).order("created_at DESC")
   end
 
   def new
