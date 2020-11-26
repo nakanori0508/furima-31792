@@ -64,6 +64,7 @@ gem 'image_processing', '~> 1.2'
 # 新規登録・ログイン機能実装用
 gem 'devise'
 
+# ActiveStorage導入済み
 
 gem 'active_hash'
 

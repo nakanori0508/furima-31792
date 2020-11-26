@@ -3,6 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_many :items
+
   with_options presence: true do 
     # string型は255文字以内制限が自動でかかってる
     # nicknameは255文字以内、平仮名カタカナ漢字を許可
