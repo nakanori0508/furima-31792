@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   # newアクションとcreateアクション実行時、未ログインユーザーは弾かれてログイン画面へ遷移する
   before_action :authenticate_user!,only:[:new,:create]
   def index
+    # N+1問題解決用。.allだと無駄な処理が出てしまう。
     @items = Item.includes(:user).order("created_at DESC")
   end
 
@@ -21,11 +22,25 @@ class ItemsController < ApplicationController
       @item.save
       redirect_to root_path
     else
-      
       render :new
     end
   end
+
+  def show
+    @item = Item.find(params[:id])
+  end
   
+  def edit
+    
+  end
+
+  def update
+    @item = Item.new(item_params)
+  end
+
+  def destroy
+  end
+
   private 
   def item_params
     # itemsテーブルにデータ保存を許可。user_idは入力必須だがparamsにはデータがないので、カレントユーザーのIDを引っ張ってくる

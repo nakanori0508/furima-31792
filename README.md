@@ -38,15 +38,15 @@
 ## purchases テーブル
 <!-- 配送先住所テーブル -->
 
-| Column             | Type       | Options                    |
-| ------------------ | ---------- | -------------------------- |
-| postcode           | string     | NOT NULL                   |
-| prefecture_id      | integer    | NOT NULL                   |
-| municipality       | string     | NOT NULL                   |
-| address            | string     | NOT NULL                   |
-| buildingname       | string     |      -                     |
-| phonenumber        | string     | NOT NULL                   |
-| buyer_id       | integer    | NOT NULL, foreign_key: true    |
+| Column             | Type       | Options                     |
+| ------------------ | ---------- | --------------------------- |
+| postcode           | string     | NOT NULL                    |
+| prefecture_id      | integer    | NOT NULL                    |
+| municipality       | string     | NOT NULL                    |
+| address            | string     | NOT NULL                    |
+| buildingname       | string     |      -                      |
+| phonenumber        | string     | NOT NULL                    |
+| buyer_id           | integer    | NOT NULL, foreign_key: true |
 
 
 ### Association
