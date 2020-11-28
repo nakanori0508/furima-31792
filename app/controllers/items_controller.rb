@@ -48,6 +48,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    Item.find(params[:id]).destroy
+    redirectIndex
   end
 
   private 
