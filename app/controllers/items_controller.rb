@@ -51,7 +51,7 @@ class ItemsController < ApplicationController
     if current_user.id == @item.user_id
       @item.destroy
     end
-    
+    redirectIndex
   end
 
   private 
