@@ -1,6 +1,10 @@
 class ItemsController < ApplicationController
   # newアクションとcreateアクション実行時、未ログインユーザーは弾かれてログイン画面へ遷移する
-  before_action :authenticate_user!,only:[:new,:create]
+  # authenticate_user!はログインしているかを確認する。user_signed_in?とほぼ同じ。
+  # ただし、遷移先はauthenticate_user!はログインページ固定。それ以外の時はuser_signed_in?を使ったほうがいい
+  before_action :authenticate_user!,only:[:new,:create,:edit]
+  before_action :get_params,only:[:show,:update,:edit]
+
   def index
     # N+1問題解決用。.allだと無駄な処理が出てしまう。
     @items = Item.includes(:user).order("created_at DESC")
@@ -27,15 +31,20 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
   
   def edit
-    
+    unless current_user.id == @item.user_id
+      redirectIndex
+    end
   end
 
   def update
-    @item = Item.new(item_params)
+    if  @item.update(update_params)
+      redirect_to action: :show
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -46,4 +55,17 @@ class ItemsController < ApplicationController
     # itemsテーブルにデータ保存を許可。user_idは入力必須だがparamsにはデータがないので、カレントユーザーのIDを引っ張ってくる
     params.require(:item).permit(:name, :explan, :category_id, :status_id, :shipfee_id, :prefecture_id, :dayship_id, :price, :image).merge(user_id: current_user.id)
   end
+
+  def update_params
+    params.require(:item).permit(:name, :explan, :category_id, :status_id, :shipfee_id, :prefecture_id, :dayship_id, :price, :image)
+  end
+
+  def redirectIndex
+    redirect_to action: :index
+  end
+
+  def get_params
+    @item = Item.find(params[:id])
+  end
+
 end
