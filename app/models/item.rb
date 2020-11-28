@@ -11,7 +11,6 @@ class Item < ApplicationRecord
     belongs_to :category
     belongs_to :status
     belongs_to :shipfee
-    belongs_to :dayship
   
     #ジャンルの選択が「--」の時は保存できないようにする
     with_options numericality: { other_than: 1 } do

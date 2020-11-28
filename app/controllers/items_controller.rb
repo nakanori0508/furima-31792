@@ -31,25 +31,11 @@ class ItemsController < ApplicationController
   end
   
   def edit
-    # ログインしていないユーザーが編集画面へアクセスすると、@itemやcurrent_userが存在しないためエラーになる。
-    # それを防ぐため、あえて二段階ifを使用している
-    if user_signed_in?
-      @item = Item.find(params[:id])
-      unless current_user.id == @item.user_id
-        redirect_to action: :index
-      end
-    else
-      redirect_to action: :index
-    end
+    
   end
 
   def update
-    @item = Item.find(params[:id])
-    if  @item.update(update_params)
-      redirect_to action: :show
-    else
-      render :edit
-    end
+    @item = Item.new(item_params)
   end
 
   def destroy
@@ -60,10 +46,4 @@ class ItemsController < ApplicationController
     # itemsテーブルにデータ保存を許可。user_idは入力必須だがparamsにはデータがないので、カレントユーザーのIDを引っ張ってくる
     params.require(:item).permit(:name, :explan, :category_id, :status_id, :shipfee_id, :prefecture_id, :dayship_id, :price, :image).merge(user_id: current_user.id)
   end
-
-  def update_params
-    params.require(:item).permit(:name, :explan, :category_id, :status_id, :shipfee_id, :prefecture_id, :dayship_id, :price, :image)
-  end
-
-
 end
