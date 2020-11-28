@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   # authenticate_user!はログインしているかを確認する。user_signed_in?とほぼ同じ。
   # ただし、遷移先はauthenticate_user!はログインページ固定。それ以外の時はuser_signed_in?を使ったほうがいい
   before_action :authenticate_user!,only:[:new,:create,:edit]
-  before_action :get_params,only:[:show,:update,:edit]
+  before_action :get_params,only:[:show,:update,:edit,:destroy]
 
   def index
     # N+1問題解決用。.allだと無駄な処理が出てしまう。
@@ -48,8 +48,10 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    Item.find(params[:id]).destroy
-    redirectIndex
+    if current_user.id == @item.user_id
+      @item.destroy
+    end
+    
   end
 
   private 
