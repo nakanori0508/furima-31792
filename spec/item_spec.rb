@@ -2,8 +2,6 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   describe '商品投稿' do
     before do
-      # user = FactoryBot.build(:user)ここでuserモデルのデータを作成
-      # @item = FactoryBot.build(:item, user_id: user.id)itemモデルにuser_idのカラムを追加してる感じ
       @item = FactoryBot.build(:item)
       # fixture_file_upload('public/images/sample1のコピー.jpg','sample1のコピー.jpg')
       # これはこれでうまくいくのか、rails_helper.rbやspec_helper.rbをいじらないとうまくいかないのかもわからない

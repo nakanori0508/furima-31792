@@ -146,7 +146,7 @@ RSpec.describe User, type: :model do
 end
 end
 
-# ターミナル上で「bundle exec rspec spec/user_spec.rb」コマンドを実行
+# ターミナル上で「bundle exec rspec spec/usermanage.rb」コマンドを実行
 # ターミナル上で「@user.errors.full_messages」コマンドを実行
 # ["Firstname can't be blank", "Firstname is invalid", "Lastname is invalid"]という記述はエラーの内容（配列）
 

@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
   def index
     # N+1問題解決用。.allだと無駄な処理が出てしまう。
     @items = Item.includes(:user).order("created_at DESC")
-    
   end
 
   def new
@@ -72,4 +71,5 @@ class ItemsController < ApplicationController
   def get_params
     @item = Item.find(params[:id])
   end
+
 end
