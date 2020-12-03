@@ -19,7 +19,7 @@ const pay = () => {
       exp_month: formData.get("item_user[card-month]"),
       exp_year: `20${formData.get("item_user[card-year]")}`,
     };
-    // console.log(card)
+    console.log(card)
     // Payjp〜〜はpayjpのgemで定義されているメソッド
     Payjp.createToken(card, (status, response) => {
       // status==200はPayjpからレスポンスが返ってきた時
