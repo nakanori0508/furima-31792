@@ -10,6 +10,11 @@ RSpec.describe ItemUser, type: :model do
       it "新規登録データが正常に入っていること" do
         expect(@itemuser).to be_valid
       end
+
+      it "建物名が空でも正常に登録できること" do
+        @itemuser.buildingname = ""
+        expect(@itemuser).to be_valid
+      end
     end
 
     context '商品購入失敗（異常系）' do

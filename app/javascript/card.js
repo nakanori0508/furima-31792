@@ -1,6 +1,5 @@
 const pay = () => {
   // pk_test_******************はPay.jpのマイページから確認できる
-  console.log("開始")
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY); // PAY.JPテスト公開鍵
   const form = document.getElementById("charge-form");
   // submitボタンをユーザーが押したら、preventDefaultで一旦何もさせないようにする
@@ -20,14 +19,14 @@ const pay = () => {
       exp_month: formData.get("item_user[card-month]"),
       exp_year: `20${formData.get("item_user[card-year]")}`,
     };
-    console.log(card)
+    // console.log(card)
     // Payjp〜〜はpayjpのgemで定義されているメソッド
     Payjp.createToken(card, (status, response) => {
       // status==200はPayjpからレスポンスが返ってきた時
       console.log(status)
       if (status == 200) {
         const token = response.id;
-        console.log(token)
+        // console.log(token)
         const renderDom = document.getElementById("charge-form");
         // token用の要素を作成する。ただし見れないようにhiddenにしている
         const tokenObj = `<input value=${token} name='token' type="hidden"> `;
