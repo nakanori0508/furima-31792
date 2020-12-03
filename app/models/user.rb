@@ -8,6 +8,7 @@ class User < ApplicationRecord
   # @user = User.find(1)とした時、@userにアソシエーションがかかってるitemを取得したい時は
   # @user.items[0].explan とすることで表示できる。itemsは複数形（1対多、[]は該当ユーザーのitemが配列で格納されるため）
   has_many :items
+  has_many :buyers
 
   with_options presence: true do 
     # string型は255文字以内制限が自動でかかってる

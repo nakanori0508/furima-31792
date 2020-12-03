@@ -75,3 +75,5 @@ gem 'faker'
 
 # binding.pry使用
 gem 'pry-rails'
+
+gem 'payjp'
