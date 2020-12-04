@@ -35,7 +35,7 @@ class ItemsController < ApplicationController
   end
   
   def edit
-    unless current_user.id == @item.user_id
+    unless current_user.id == @item.user_id || @item.buyer == nil
       redirectIndex
     end
   end
